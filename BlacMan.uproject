@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{2A08D8B5-4C47-8E4E-CD6E-5FBEF30447CF}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "BlacMan",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
