@@ -17,6 +17,9 @@ public:
 	// Sets default values for this component's properties
 	UBaseCharacterComponent();
 
+	FVector GetWorldLocation() const { return GetOwner()->GetActorLocation(); }
+	void SetWorldLocation(const FVector& NewLocation) { GetOwner()->SetActorLocation(NewLocation); }
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -26,5 +29,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+
+protected:
+
+	UPROPERTY(EditAnywhere)
+	float RunSpeed;
+
+	UPROPERTY(EditAnywhere)
+	float TempRadius;
+
+	UPROPERTY(EditAnywhere)
+	bool AutoRun;
 };

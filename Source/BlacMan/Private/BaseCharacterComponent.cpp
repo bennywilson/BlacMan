@@ -10,7 +10,8 @@ UBaseCharacterComponent::UBaseCharacterComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
+	RunSpeed = 200.0f;
+	TempRadius = 100.0f;
 	// ...
 }
 
@@ -41,4 +42,10 @@ void UBaseCharacterComponent::BeginDestroy()
 void UBaseCharacterComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
- }
+
+	if (AutoRun)
+	{
+		FVector VecTo = GetOwner()->GetActorRotation().Vector();
+		SetWorldLocation(GetWorldLocation() + VecTo * DeltaTime * RunSpeed);
+	}
+}

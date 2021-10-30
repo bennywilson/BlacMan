@@ -32,8 +32,25 @@ void URacistCharacterComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UBaseCharacterComponent* const Player = ABlacManGameMode::Get()->GetPlayer();
-	FRotator NewRotator = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), Player->GetOwner()->GetActorLocation());
-	GetOwner()->SetActorRotation(NewRotator);
+	if (AutoRun == false)
+	{
+		UBaseCharacterComponent* const Player = ABlacManGameMode::Get()->GetPlayer();
+		FRotator NewRotator = UKismetMathLibrary::FindLookAtRotation(GetWorldLocation(), Player->GetWorldLocation());
+		GetOwner()->SetActorRotation(NewRotator);
+
+		const float DistanceToPlayer = FVector::Dist2D(GetWorldLocation(), Player->GetWorldLocation());
+		if (DistanceToPlayer > TempRadius)
+		{
+			FVector VecTo = (Player->GetWorldLocation() - GetWorldLocation());
+			VecTo.Z = 0;
+			VecTo.Normalize();
+
+			SetWorldLocation(GetWorldLocation() + VecTo * DeltaTime * RunSpeed);
+		}
+	}
+	else
+	{
+		GetOwner()->SetActorRotation(UKismetMathLibrary::FindLookAtRotation(GetWorldLocation(), GetWorldLocation() + FVector(0.0f, 10.0f, 0.0f)));
+	}
 }
 

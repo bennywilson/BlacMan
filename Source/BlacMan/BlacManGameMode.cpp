@@ -87,9 +87,21 @@ void ABlacManGameMode::Tick(float DeltaSeconds)
 	if (bHasEnemies == false && GetPlayer())
 	{
 		ABlacManWorldSettings* const WorldSettings = Cast<ABlacManWorldSettings>(GetWorldSettings());
-		FVector DefaultLoc = GetPlayer()->GetOwner()->GetActorLocation();
+
 		FRotator DefaultRot;
-		AActor* NewEnemy = GetWorld()->SpawnActor(WorldSettings->GetEnemyTypesList()[0]->GetDefaultObject()->GetClass(), &DefaultLoc, &DefaultRot);
-		CharacterList.Add((UBaseCharacterComponent*)NewEnemy->GetComponentByClass(UBaseCharacterComponent::StaticClass()));
+		FVector CurOffset(-100.0f, -500.0f, 0.0f);
+
+		for (int i = 0; i < 4; i++)
+		{
+			FVector DefaultLoc = GetPlayer()->GetOwner()->GetActorLocation() + CurOffset;
+			AActor* NewEnemy = GetWorld()->SpawnActor(WorldSettings->GetEnemyTypesList()[i]->GetDefaultObject()->GetClass(), &DefaultLoc, &DefaultRot);
+			
+			if (NewEnemy)
+			{
+				CharacterList.Add((UBaseCharacterComponent*)NewEnemy->GetComponentByClass(UBaseCharacterComponent::StaticClass()));
+			}
+			CurOffset.Y -= 300.0f;
+			CurOffset.X -= 200.0f;
+		}
 	}
 }
