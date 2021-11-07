@@ -5,5 +5,5 @@
 
 void UBlacManCharacterComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	//::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }

@@ -18,10 +18,10 @@ void ABlacManPlayerController::PlayerTick(float DeltaTime)
 	Super::PlayerTick(DeltaTime);
 
 	// keep updating the destination every tick while desired
-	if (bMoveToMouseCursor)
+/*	if (bMoveToMouseCursor)
 	{
 		MoveToMouseCursor();
-	}
+	}*/
 }
 
 void ABlacManPlayerController::SetupInputComponent()
@@ -46,7 +46,7 @@ void ABlacManPlayerController::OnResetVR()
 
 void ABlacManPlayerController::MoveToMouseCursor()
 {
-	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
+	/*if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
 	{
 		if (ABlacManCharacter* MyPawn = Cast<ABlacManCharacter>(GetPawn()))
 		{
@@ -67,7 +67,7 @@ void ABlacManPlayerController::MoveToMouseCursor()
 			// We hit something, move there
 			SetNewMoveDestination(Hit.ImpactPoint);
 		}
-	}
+	}*/
 }
 
 void ABlacManPlayerController::MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location)

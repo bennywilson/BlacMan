@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+#include "BaseCharacterComponent.h"
 #include "../BlacManGameMode.h"
 #include "Kismet/GameplayStatics.h"
-#include "BaseCharacterComponent.h"
+
 
 // Sets default values for this component's properties
 UBaseCharacterComponent::UBaseCharacterComponent()
@@ -45,6 +45,7 @@ void UBaseCharacterComponent::TickComponent(float DeltaTime, ELevelTick TickType
 
 	if (AutoRun)
 	{
+		GetOwner()->SetActorRotation(FRotator(0, 180, 0));
 		FVector VecTo = GetOwner()->GetActorRotation().Vector();
 		SetWorldLocation(GetWorldLocation() + VecTo * DeltaTime * RunSpeed);
 	}
